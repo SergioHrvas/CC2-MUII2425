@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: owncloud
+  namespace: owncloud
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: owncloud
+  template:
+    metadata:
+      labels:
+        app: owncloud
+    spec:
+      containers:
+        - name: owncloud
+          image: owncloud:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: MYSQL_DATABASE
+              value: "owncloud_db"
+            - name: MYSQL_USER
+              value: "usuario"
+            - name: MYSQL_PASSWORD
+              value: "password"
+            - name: MYSQL_HOST
+              value: "mariadb"
+          volumeMounts:
+            - name: data-volume
+              mountPath: /var/www/html/data
+      volumes:
+        - name: data-volume
+          persistentVolumeClaim:
+            claimName: owncloud-pvc
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: owncloud
+  namespace: owncloud
+spec:
+  selector:
+    app: owncloud
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP

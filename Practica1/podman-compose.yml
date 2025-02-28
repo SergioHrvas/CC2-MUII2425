@@ -1,0 +1,75 @@
+version: "3.8"
+
+services:
+  haproxy:
+    image: haproxy:latest
+    container_name: haproxy
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    ports:
+      - "8080:8080"
+      - "8404:8404"
+    networks:
+      - owncloud_net
+    restart: always
+      
+  openldap:
+    image: osixia/openldap:1.5.0
+    container_name: openldap-server
+    ports:
+      - "389:389"
+      - "636:636"
+    networks:
+      - owncloud_net
+    volumes:
+      - /home/sergio/Documentos/Master/CC-2/Practica1/volume_ldap/data/slapd/database:/var/lib/ldap
+      - /home/sergio/Documentos/Master/CC-2/Practica1/volume_ldap/data/slapd/config:/etc/ldap/slapd.d
+    restart: always
+
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - owncloud_net
+    volumes:
+      - /home/sergio/Documentos/Master/CC-2/Practica1/volume_redis:/data
+    command: redis-server --save 60 1 --loglevel warning
+    restart: always
+
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: "passwordroot"
+      MYSQL_DATABASE: "owncloud_db"
+      MYSQL_USER: "usuario"
+      MYSQL_PASSWORD: "password"
+    networks:
+      - owncloud_net
+    volumes:
+      - /home/sergio/Documentos/Master/CC-2/Practica1/volume_mariadb/MariaDB_data:/var/lib/mysql
+    restart: always
+
+  owncloud1:
+    image: owncloud:latest
+    container_name: owncloud1
+    networks:
+      - owncloud_net
+    volumes:
+      - /home/sergio/Documentos/Master/CC-2/Practica1/volume_owncloud:/var/www/html/data
+    restart: always
+
+  owncloud2:
+    image: owncloud:latest
+    container_name: owncloud2
+    networks:
+      - owncloud_net
+    volumes:
+      - /home/sergio/Documentos/Master/CC-2/Practica1/volume_owncloud:/var/www/html/data
+    restart: always
+
+networks:
+  owncloud_net:
+    driver: bridge
