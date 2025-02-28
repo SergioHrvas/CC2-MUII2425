@@ -1,0 +1,63 @@
+# Usuario: Juan Pérez (Empleado - IT)
+dn: cn=Juan Perez,ou=Empleados,dc=example,dc=org
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+cn: Juan Perez
+sn: Perez
+uid: jperez
+uidNumber: 1001
+gidNumber: 1001
+homeDirectory: /home/jperez
+loginShell: /bin/bash
+userPassword: {SSHA}contraseña_encriptada
+mail: jperez@example.org
+title: IT
+
+# Usuario: María Gómez (Empleado - Ventas)
+dn: cn=Maria Gomez,ou=Empleados,dc=example,dc=org
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+cn: Maria Gomez
+sn: Gomez
+uid: mgomez
+uidNumber: 1002
+gidNumber: 1001
+homeDirectory: /home/mgomez
+loginShell: /bin/bash
+userPassword: {SSHA}contraseña_encriptada
+mail: mgomez@example.org
+title: Ventas
+
+# Usuario: Luis Rodríguez (Administrador)
+dn: cn=Luis Rodriguez,ou=Administradores,dc=example,dc=org
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+cn: Luis Rodriguez
+sn: Rodriguez
+uid: lrodriguez
+uidNumber: 2001
+gidNumber: 2001
+homeDirectory: /home/lrodriguez
+loginShell: /bin/bash
+userPassword: {SSHA}contraseña_encriptada
+mail: lrodriguez@example.org
+title: Administrador
+
+# Usuario: Ana López (Practicante - RRHH)
+dn: cn=Ana Lopez,ou=Practicantes,dc=example,dc=org
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+cn: Ana Lopez
+sn: Lopez
+uid: alopez
+uidNumber: 3001
+gidNumber: 3001
+homeDirectory: /home/alopez
+loginShell: /bin/bash
+userPassword: {SSHA}contraseña_encriptada
+mail: alopez@example.org
+title: Practicante RRHH

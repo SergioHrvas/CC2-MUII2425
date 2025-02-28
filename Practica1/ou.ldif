@@ -1,0 +1,14 @@
+dn: ou=Empleados,dc=example,dc=org
+objectClass: top
+objectClass: organizationalUnit
+ou: Empleados
+
+dn: ou=Administradores,dc=example,dc=org
+objectClass: top
+objectClass: organizationalUnit
+ou: Administradores
+
+dn: ou=Practicantes,dc=example,dc=org
+objectClass: top
+objectClass: organizationalUnit
+ou: Practicantes

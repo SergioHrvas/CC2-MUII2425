@@ -1,0 +1,13 @@
+dn: uid=migue,dc=example,dc=org
+cn: miguemorales
+uid: migue
+sn: 3
+objectClass: top
+objectClass: posixAccount
+objectClass: inetOrgPerson
+uidNumber: 501
+gidNumber: 20
+homeDirectory: /home/migue
+loginShell: /bin/bash
+gecos: migue
+userPassword: {crypt}x
